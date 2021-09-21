@@ -29,26 +29,28 @@ export default (props) => {
       id: 'p4',
       title: 'Orange Hat',
       description: 'Street style! An orange hat.',
-      isFavorite: false,
-    },
-  ])
-  const toggleFavourite = (productId) => {
-    setProductsList((currentProdList) => {
-      const prodIndex = currentProdList.findIndex((p) => p.id === productId)
-      const newFavStatus = !currentProdList[prodIndex].isFavorite
-      const updatedProducts = [...currentProdList]
+      isFavorite: false
+    }
+  ]);
+
+  const toggleFavorite = productId => {
+    setProductsList(currentProdList => {
+      const prodIndex = currentProdList.findIndex(p => p.id === productId);
+      const newFavStatus = !currentProdList[prodIndex].isFavorite;
+      const updatedProducts = [...currentProdList];
       updatedProducts[prodIndex] = {
         ...currentProdList[prodIndex],
-        isFavorite: newFavStatus,
-      }
-      return updatedProducts
-    })
-  }
+        isFavorite: newFavStatus
+      };
+      return updatedProducts;
+    });
+  };
 
   return (
     <ProductsContext.Provider
-      value={{ products: productsList, toggleFav: toggleFavourite }}>
+      value={{ products: productsList, toggleFav: toggleFavorite }}
+    >
       {props.children}
     </ProductsContext.Provider>
-  )
-}
+  );
+};
